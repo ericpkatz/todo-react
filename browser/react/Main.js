@@ -27,7 +27,10 @@ export default class Main extends Component {
   deleteTask(taskId){
     axios.delete(`/api/todo/${taskId}`)
     .then(res => res.data)
-    .then(tasks => {
+    .then(() => {
+      const tasks = this.state.tasks.filter( task => {
+        return task.id !== taskId;
+      });
       this.setState({ tasks })
     })
   }
